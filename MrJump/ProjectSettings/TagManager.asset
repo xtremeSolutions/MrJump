@@ -13,6 +13,7 @@ TagManager:
   - roof
   - bluePortal
   - orangePortal
+  - GroundDetector
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Jump : MonoBehaviour
@@ -18,16 +19,18 @@ public class Jump : MonoBehaviour
     private bool extraJump = false;
     private bool nitrogenFly = false;
     private int extraJumpCount = 0;
+    public Text allow;
    
     void Update()
     {
         #region One Extra Jump Scripting
-        if ( (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)) && extraJump == true)
+        if ( (extraJump == true  &&Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)))
         {
+          
             extraJump = true;
             extraJumpCount = 1;
         }
-        if ((Input.GetKey(KeyCode.Space)|| (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)) && extraJumpCount == 1  )
+        if (extraJumpCount == 1 &&(Input.GetKey(KeyCode.Space)|| (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)))
         {
             if (jumpCounter > 0)
             {
@@ -36,28 +39,24 @@ public class Jump : MonoBehaviour
             }
             else
             {
-                isJumping = false;
                 extraJump = false;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Ended))
-        {
-            isJumping = false;
-            extraJump = false;
-            extraJumpCount -= 1;
-        }
+       
         #endregion
 
         #region Nitrogen Continous Jumping Script
         if ((Input.GetKey(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)) && nitrogenFly)
-        { 
-            rigidbody2D.velocity = Vector2.up * jumpVelocity; 
+        {
+            rigidbody2D.velocity = Vector2.up * jumpVelocity;
+            allow.text = "jump";
         }
         #endregion
 
         #region Normal Ground Jumping Script
         if (isGrounded && (Input.GetKeyDown(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)))
         {
+            rigidbody2D.velocity = Vector2.up * jumpVelocity;
             isJumping = true;
             jumpCounter = jumpLaps;
         }
@@ -71,6 +70,7 @@ public class Jump : MonoBehaviour
             }
             else
             {
+                allow.text = " ";
                 isJumping = false;
                 extraJump = false;
             }
@@ -78,10 +78,13 @@ public class Jump : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Ended))
         {
             isJumping = false;
-            extraJumpCount -= 1;    
+            extraJumpCount -= 1;
+            extraJump = false;
         }
         #endregion
     }
+
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -89,7 +92,8 @@ public class Jump : MonoBehaviour
         {
             isGrounded = true;
             nitrogenFly = false;
-            extraJump = false; 
+            extraJump = false;
+            allow.text = "jump";
         }
         else if (collision.gameObject.CompareTag("roof"))
         {
@@ -104,6 +108,7 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ground"))
         {
+            allow.text = " ";
             isGrounded = false;
             extraJump = false;
                 
