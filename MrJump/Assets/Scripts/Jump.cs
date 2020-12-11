@@ -77,6 +77,7 @@ public class Jump : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Ended))
         {
+            isGrounded = false; 
             isJumping = false;
             extraJumpCount -= 1;
             extraJump = false;
