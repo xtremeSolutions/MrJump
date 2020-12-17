@@ -14,6 +14,8 @@ TagManager:
   - bluePortal
   - orangePortal
   - GroundDetector
+  - SpikeProtector
+  - Lost
   layers:
   - Default
   - TransparentFX
@@ -50,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: water
+    uniqueID: 2041595863
     locked: 0
