@@ -95,7 +95,7 @@ public class Jump : MonoBehaviour
 
     public void KeepJumping()
     {
-        if (true)
+        if (isGrounded||extraJump)
         {
             jumpCounter = jumpLaps;
             isJumping = true;
@@ -158,9 +158,11 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ExtraJump"))
         {
+           
             extraJump = true;
             jumpCounter = jumpLaps;
-            Destroy(collision.gameObject);
+            // Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         if (collision.gameObject.CompareTag("NitrogenJump"))
         {
