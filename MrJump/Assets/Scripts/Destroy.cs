@@ -8,11 +8,11 @@ public class Destroy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("twoD");
+            SceneManager.LoadScene("GamePlay");
          }
         else if (collision.gameObject.CompareTag("ground")|| collision.gameObject.CompareTag("TOP"))
         {
-            SceneManager.LoadScene("twoD");
+            SceneManager.LoadScene("GamePlay");
         }
         else if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("nextlevel"))
         {
