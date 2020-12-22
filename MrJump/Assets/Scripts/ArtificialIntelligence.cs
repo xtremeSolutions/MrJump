@@ -7,6 +7,7 @@ public class ArtificialIntelligence : MonoBehaviour
     private Renderer nextRenderer;
     private float distance;
     public GameObject Script;
+    public float down;
 
     private void Update()
     {
@@ -20,7 +21,7 @@ public class ArtificialIntelligence : MonoBehaviour
             {
                 distance = (nextRenderer.bounds.max.x) - (gameObject.transform.position.x);
                
-                Script.transform.GetComponent<Jump>().KeepJumping();
+                Script.transform.GetComponent<Jump>().KeepJumping(down);
 
                 if (distance >=-0.9f) 
                 {

@@ -13,6 +13,8 @@ public class Jump : MonoBehaviour
     [SerializeField] private float jumpVelocity = 5;
     [SerializeField] private bool isGrounded;
     [SerializeField] GameObject Spike;
+    [SerializeField] private Vector2 up = Vector2.zero;
+    [SerializeField] private Vector2 down = Vector2.zero;
     #endregion
 
     private float jumpCounter;
@@ -21,13 +23,13 @@ public class Jump : MonoBehaviour
     private bool nitrogenFly = false;
     private int extraJumpCount = 0;
     public Text allow;
-   
+
+
 
     #region Self Inteligence
     private float spikePassThroughSpeed;
     #endregion
 
-   
 
     void Update()
     {
@@ -57,7 +59,7 @@ public class Jump : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)) && nitrogenFly)
         {
             rigidbody2D.velocity = Vector2.up * jumpVelocity;
-            allow.text = "jump";
+        allow.text = "jump";
         }
         #endregion
 
@@ -91,9 +93,10 @@ public class Jump : MonoBehaviour
         }
         #endregion
 
+
     }
 
-    public void KeepJumping()
+    public void KeepJumping(float down)
     {
         if (isGrounded||extraJump)
         {
@@ -114,7 +117,13 @@ public class Jump : MonoBehaviour
             isJumping = false;
             extraJump = false;
         }
+        if (nitrogenFly) 
+        {
+            if (transform.position.y <= down+0.7) { rigidbody2D.velocity = Vector2.up * jumpVelocity; }
+        }
+
     }
+
 
     public void StopJump() {
         {
@@ -123,10 +132,10 @@ public class Jump : MonoBehaviour
             isJumping = false;
             extraJumpCount -= 1;
             extraJump = false;
+          
         }
     }
-
-
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -158,16 +167,14 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ExtraJump"))
         {
-           
             extraJump = true;
             jumpCounter = jumpLaps;
-            // Destroy(collision.gameObject);
             collision.gameObject.SetActive(false);
         }
         if (collision.gameObject.CompareTag("NitrogenJump"))
         {
             nitrogenFly = true;
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("SpikeProtector"))
         {
