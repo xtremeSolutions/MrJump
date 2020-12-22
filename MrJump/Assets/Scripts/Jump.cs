@@ -24,6 +24,7 @@ public class Jump : MonoBehaviour
     private bool nitrogenFly = false;
     private int extraJumpCount = 0;
     public Text allow;
+    public Animator animator;
 
 
 
@@ -108,7 +109,7 @@ public class Jump : MonoBehaviour
        
         if (jumpCounter > 0 && isJumping == true)
         {
-
+          
             rigidbody2D.velocity = Vector2.up * jumpVelocity;
             jumpCounter -= Time.deltaTime;
         }
@@ -148,6 +149,7 @@ public class Jump : MonoBehaviour
             nitrogenFly = false;
             extraJump = false;
             allow.text = "jump";
+            animator.SetBool("isgrounded", true);
         }
         else if (collision.gameObject.CompareTag("roof"))
         {
@@ -161,6 +163,7 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             allow.text = " ";
+            animator.SetBool("isgrounded", false);
             isGrounded = false;
             extraJump = false;
          }

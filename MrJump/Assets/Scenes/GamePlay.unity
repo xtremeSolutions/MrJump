@@ -379,6 +379,7 @@ MonoBehaviour:
   up: {x: 0, y: 0}
   down: {x: 0, y: 0}
   allow: {fileID: 1795852937}
+  animator: {fileID: 0}
 --- !u!1 &103607532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1501,7 @@ MonoBehaviour:
   up: {x: 62.193, y: 3.1}
   down: {x: 62.193, y: 2.3}
   allow: {fileID: 1795852937}
+  animator: {fileID: 868395006}
 --- !u!50 &868395009
 Rigidbody2D:
   serializedVersion: 4
@@ -1620,7 +1622,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868395005}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c3a61cddb0ca9442afe5daf3ea845e4, type: 3}
   m_Name: 
@@ -1662,7 +1664,6 @@ MonoBehaviour:
   playerPositionX: 0
   playerPositionY: 0
   down: 0
-  animator: {fileID: 868395006}
 --- !u!1 &907084952
 GameObject:
   m_ObjectHideFlags: 0
