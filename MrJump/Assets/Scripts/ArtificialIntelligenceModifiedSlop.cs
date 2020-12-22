@@ -16,13 +16,15 @@ public class ArtificialIntelligenceModifiedSlop : MonoBehaviour
     [SerializeField] private float playerPositionX;
     [SerializeField] private float playerPositionY;
     [SerializeField] float down;
+    public Animator animator;
+
 
 
     private void Start()
     {
         playerPositionX = transform.position.x;
         playerJumpController = playerJumpController.GetComponent<Jump>();
-
+        animator.SetBool("isgrounded", true);
     }
 
     private void Update()
@@ -32,31 +34,37 @@ public class ArtificialIntelligenceModifiedSlop : MonoBehaviour
         if (playerPositionX <= CurrentPlatformX())
         {
             playerJumpController.KeepJumping(down);
+            animator.SetBool("isgrounded", false);
 
             if (playerPositionX - (NextPlatformX()) >= 2.5f)
             {
                 if (playerPositionX <= UpcommingExtraJump())
                 {
                     playerJumpController.KeepJumping(down);
+                    animator.SetBool("isgrounded", false);
                 }
                 if (playerPositionX <= UpcommingflyJump())
                 {
                     playerJumpController.KeepJumping(down);
+                    animator.SetBool("isgrounded", false);
                 }
                 if ((NextPlatformX()) - playerPositionX >= -0.9f || (UpcommingExtraJump()) - playerPositionX >= -0.9f)
                 {
                     playerJumpController.StopJump(); extraJumpIndex++;
+                    animator.SetBool("isgrounded", true);
                 }
-                if ((NextPlatformX()) - playerPositionX >= 0.9f || (UpcommingflyJump()) - playerPositionX >= -0.9f)
+                if ((NextPlatformX()) - playerPositionX >= -0.9f || (UpcommingflyJump()) - playerPositionX >= -0.9f)
                 {
                     playerJumpController.StopJump();
+                    animator.SetBool("isgrounded", true);
                     FlyJumpIndex++;
                 }
             }
 
-            if ((((NextPlatformX()) - playerPositionX)) >= -0.8f)
+            if ((((NextPlatformX()) - playerPositionX)) >= -0.5f)
             {
                 playerJumpController.StopJump();
+                animator.SetBool("isgrounded", true);
                 currentPlatformIndex++;
             }
 

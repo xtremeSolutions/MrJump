@@ -15,6 +15,7 @@ public class Jump : MonoBehaviour
     [SerializeField] GameObject Spike;
     [SerializeField] private Vector2 up = Vector2.zero;
     [SerializeField] private Vector2 down = Vector2.zero;
+
     #endregion
 
     private float jumpCounter;
@@ -100,6 +101,7 @@ public class Jump : MonoBehaviour
     {
         if (isGrounded||extraJump)
         {
+           
             jumpCounter = jumpLaps;
             isJumping = true;
         }
@@ -119,6 +121,7 @@ public class Jump : MonoBehaviour
         }
         if (nitrogenFly) 
         {
+        
             if (transform.position.y <= down+0.7) { rigidbody2D.velocity = Vector2.up * jumpVelocity; }
         }
 
