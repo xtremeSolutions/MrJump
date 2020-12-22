@@ -116,7 +116,7 @@ public class Jump : MonoBehaviour
         else
         {
             
-            allow.text = " ";
+            allow.text = "Can not Jump ";
             isJumping = false;
             extraJump = false;
         }
@@ -148,7 +148,7 @@ public class Jump : MonoBehaviour
             isGrounded = true;
             nitrogenFly = false;
             extraJump = false;
-            allow.text = "jump";
+            allow.text = "Jump";
             animator.SetBool("isgrounded", true);
         }
         else if (collision.gameObject.CompareTag("roof"))
@@ -162,7 +162,7 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ground"))
         {
-            allow.text = " ";
+            allow.text = "Can Not Jump ";
             animator.SetBool("isgrounded", false);
             isGrounded = false;
             extraJump = false;

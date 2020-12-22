@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class Destroy : MonoBehaviour
 {
     
+    
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -21,4 +22,14 @@ public class Destroy : MonoBehaviour
       
     }
 
+    public void Restart() {
+        SceneManager.LoadScene("GamePlay");
+    }
+    public void quit()
+    {
+        Application.Quit();
+    }
+    public void Ai() {
+        SceneManager.LoadScene("GamePlay2");
+    }
 }
